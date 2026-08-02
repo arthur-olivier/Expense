@@ -3,6 +3,7 @@
 
 "use client";
 
+import { Trash2 } from "lucide-react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -35,8 +36,9 @@ export default function ConfirmDeleteDialog({
     <AlertDialog>
       <AlertDialogTrigger asChild>
         {trigger ?? (
-          <Button variant="destructive" size="sm">
-            Supprimer
+          <Button variant="destructive" size="sm" aria-label="Supprimer">
+            <Trash2 className="size-4 md:mr-1.5" />
+            <span className="hidden md:inline">Supprimer</span>
           </Button>
         )}
       </AlertDialogTrigger>

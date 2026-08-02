@@ -114,7 +114,10 @@ export default function ChargesClient({ year, month, initialRevenus, initialDepe
                 <h1 className="text-2xl font-bold tracking-tight" style={{ color: "var(--color-text-primary)" }}>
                   Charges mensuelles
                 </h1>
-                <PageGuide pageKey="charges" autoOpen={revenus.length === 0 && depenses.length === 0 && investments.length === 0} />
+                <PageGuide
+                  pageKey="charges"
+                  autoOpen={revenus.length === 0 && depenses.length === 0 && investments.length === 0}
+                />
               </div>
               <p className="mt-1 text-sm" style={{ color: "var(--color-text-muted)" }}>
                 Revenus, dépenses et placements du mois
@@ -128,7 +131,7 @@ export default function ChargesClient({ year, month, initialRevenus, initialDepe
 
           {/* Reste à vivre (bannière) — passe après les boutons sur mobile */}
           <div
-            className="order-3 flex w-full items-center justify-between gap-4 rounded-xl px-5 py-3 md:order-none md:w-fit md:justify-start"
+            className="order-4 flex w-full items-center justify-between gap-4 rounded-xl px-5 py-3 md:order-none md:w-fit md:justify-start"
             style={{
               background: isPositive ? "var(--color-success-bg)" : "var(--color-danger-bg)",
             }}
@@ -144,11 +147,18 @@ export default function ChargesClient({ year, month, initialRevenus, initialDepe
 
         {/* Partie de droite : boutons export + mois */}
         <div className="contents md:flex md:flex-col md:items-end md:gap-2 md:mr-20">
-          <div className="order-2 flex items-center justify-end gap-3 md:order-none md:w-full">
-            <ExportDialog year={year} month={month} />
-            <MonthYearPicker year={year} month={month} onChange={handleMonthChange} />
+          <div className="contents md:order-none md:flex md:items-center md:justify-end md:gap-3 md:w-full">
+            <div className="order-2 md:order-none">
+              <ExportDialog year={year} month={month} />
+            </div>
+            <div className="order-3 flex justify-end md:order-none">
+              <MonthYearPicker year={year} month={month} onChange={handleMonthChange} />
+            </div>
           </div>
-          <p className={`order-4 text-xs font-medium md:order-none ${isPastMonth ? "" : "hidden md:invisible md:block"}`} style={{ color: "var(--color-warning)" }}>
+          <p
+            className={`order-5 text-xs font-medium md:order-none ${isPastMonth ? "" : "hidden md:invisible md:block"}`}
+            style={{ color: "var(--color-warning)" }}
+          >
             Mois passé · lecture seule
           </p>
         </div>
@@ -161,7 +171,10 @@ export default function ChargesClient({ year, month, initialRevenus, initialDepe
         header={
           <>
             <div className="flex items-center gap-2.5">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg" style={{ background: "var(--color-success-bg)" }}>
+              <div
+                className="flex h-7 w-7 items-center justify-center rounded-lg"
+                style={{ background: "var(--color-success-bg)" }}
+              >
                 <TrendingUp size={14} style={{ color: "var(--color-success)" }} />
               </div>
               <h2 className="text-sm font-bold" style={{ color: "var(--color-text-primary)" }}>
@@ -192,7 +205,10 @@ export default function ChargesClient({ year, month, initialRevenus, initialDepe
         header={
           <>
             <div className="flex items-center gap-2.5">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg" style={{ background: "var(--color-danger-bg)" }}>
+              <div
+                className="flex h-7 w-7 items-center justify-center rounded-lg"
+                style={{ background: "var(--color-danger-bg)" }}
+              >
                 <TrendingDown size={14} style={{ color: "var(--color-danger)" }} />
               </div>
               <h2 className="text-sm font-bold" style={{ color: "var(--color-text-primary)" }}>
@@ -223,7 +239,10 @@ export default function ChargesClient({ year, month, initialRevenus, initialDepe
         header={
           <>
             <div className="flex items-center gap-2.5">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg" style={{ background: "var(--color-investment-bg)" }}>
+              <div
+                className="flex h-7 w-7 items-center justify-center rounded-lg"
+                style={{ background: "var(--color-investment-bg)" }}
+              >
                 <PiggyBank size={14} style={{ color: "var(--color-investment)" }} />
               </div>
               <h2 className="text-sm font-bold" style={{ color: "var(--color-text-primary)" }}>
