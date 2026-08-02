@@ -17,7 +17,7 @@ import {
   getWallet,
   getWalletTransactions,
   getWallets,
-} from "@/actions/wallet.actions";
+} from "@/lib/data/wallet";
 import ConfirmDeleteDialog from "@/components/shared/ConfirmDeleteDialog";
 import Modal from "@/components/shared/Modal";
 import { Card, CardContent } from "@/components/ui/card";

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
+import { isDemo } from "@/lib/demo";
 import {
   LayoutDashboard,
   Receipt,
@@ -32,6 +33,7 @@ export default function Sidebar() {
 
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (stored) setCollapsed(stored === "true");
   }, []);
 
@@ -149,8 +151,25 @@ export default function Sidebar() {
         </nav>
       </div>
 
+      {/* Bottom (démo) : visiteur fictif, pas de déconnexion */}
+      {isDemo && (
+        <div className="flex items-center gap-2.5 px-3 py-2 pt-4" style={{ borderTop: "1px solid var(--color-sidebar-border)", justifyContent: collapsed ? "center" : "flex-start" }}>
+          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 shrink-0">
+            <span className="text-[10px] font-semibold text-white">V</span>
+          </div>
+          {!collapsed && (
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium" style={{ color: "var(--color-sidebar-text)" }}>
+                Visiteur
+              </span>
+              <span className="rounded bg-indigo-500/20 px-1.5 py-0.5 text-[10px] font-semibold text-indigo-300">Démo</span>
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Bottom: user + logout */}
-      {session?.user && (
+      {!isDemo && session?.user && (
         <div
           className="flex flex-col gap-0.5 pt-4"
           style={{ borderTop: "1px solid var(--color-sidebar-border)" }}

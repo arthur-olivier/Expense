@@ -7,7 +7,7 @@ import { Pencil } from "lucide-react";
 import {
   updatePortfolioOpenedAt,
   getPortfolioOpenedAtMax,
-} from "@/actions/portfolio/portfolios.actions";
+} from "@/lib/data/portfolio/portfolios";
 import type { Portfolio } from "@/types/portfolio";
 
 import Modal from "@/components/shared/Modal";

@@ -13,7 +13,7 @@ import {
   type SimulationParams,
   type SimulationSaveRecord,
   type SimulationType,
-} from "@/actions/simulateur.actions";
+} from "@/lib/data/simulateur";
 
 interface SaveSimulationDialogProps {
   type: SimulationType;

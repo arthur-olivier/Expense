@@ -2,20 +2,18 @@ import { getRevenusByMonth } from "@/actions/charges/revenus.actions";
 import { getDepensesByMonth } from "@/actions/charges/depenses.actions";
 import { getInvestmentsByMonth } from "@/actions/charges/investments.actions";
 import ChargesClient from "@/components/features/charges/ChargesClient";
+import ChargesDemoLoader from "@/components/features/charges/ChargesDemoLoader";
+import { isDemo } from "@/lib/demo";
 
 export default async function ChargesPage({ searchParams }: { searchParams: Promise<{ year?: string; month?: string }> }) {
   const params = await searchParams;
   const now = new Date();
 
-  let year = now.getFullYear();
-  if (params.year != null) {
-    year = Number(params.year);
-  }
+  const year = params.year != null ? Number(params.year) : now.getFullYear();
+  const month = params.month != null ? Number(params.month) : now.getMonth();
 
-  let month = now.getMonth();
-  if (params.month != null) {
-    month = Number(params.month);
-  }
+  // En démo, les données sont dans le navigateur : on délègue le chargement au client.
+  if (isDemo) return <ChargesDemoLoader year={year} month={month} />;
 
   const [revenus, depenses, investments] = await Promise.all([
     getRevenusByMonth(year, month),

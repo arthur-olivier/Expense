@@ -4,7 +4,7 @@ import { useState, useTransition } from "react";
 import { toast } from "sonner";
 import { TrendingUp } from "lucide-react";
 
-import { getOwnedAssets, updateAssetPrices } from "@/actions/portfolio/assets.actions";
+import { getOwnedAssets, updateAssetPrices } from "@/lib/data/portfolio/assets";
 import type { Asset } from "@/types/portfolio";
 
 import { Button } from "@/components/ui/button";

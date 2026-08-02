@@ -2,7 +2,7 @@
 
 import { useState, useTransition } from "react";
 import { toast } from "sonner";
-import { createAssetManual } from "@/actions/portfolio/assets.actions";
+import { createAssetManual } from "@/lib/data/portfolio/assets";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { Asset } from "@/types/portfolio";

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { getOwnedAssets } from "@/actions/portfolio/assets.actions";
+import { getOwnedAssets } from "@/lib/data/portfolio/assets";
 import Modal from "@/components/shared/Modal";
 import GenericSelect from "@/components/shared/GenericSelect";
 import { Switch } from "@/components/ui/switch";

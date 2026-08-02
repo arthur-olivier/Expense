@@ -8,8 +8,8 @@ import {
   listSupportedBrokerProviders,
   previewBrokerImport,
   importBrokerFile,
-} from "@/actions/portfolio/import.actions";
-import { getBrokers } from "@/actions/portfolio/brokers.actions";
+} from "@/lib/data/portfolio/import";
+import { getBrokers } from "@/lib/data/portfolio/brokers";
 import { PortfolioTypeLabels } from "@/lib/enums";
 import type { Portfolio, Broker } from "@/types/portfolio";
 

@@ -2,7 +2,7 @@
 
 import { toast } from "sonner";
 import DynamicEntityModal from "@/components/shared/DynamicEntityModal";
-import { updateDepense, addDepense } from "@/actions/charges/depenses.actions";
+import { updateDepense, addDepense } from "@/lib/data/charges/depenses";
 import { CategoryDepense, TypeDepense, CategoryLabels, TypeLabels } from "@/lib/enums";
 import type { Depense } from "@/types/finance";
 

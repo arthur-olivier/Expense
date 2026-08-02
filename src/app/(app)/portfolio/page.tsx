@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { LineChart } from "lucide-react";
 
-import { getPortfolios } from "@/actions/portfolio/portfolios.actions";
-import { getBrokers } from "@/actions/portfolio/brokers.actions";
+import { getPortfolios } from "@/lib/data/portfolio/portfolios";
+import { getBrokers } from "@/lib/data/portfolio/brokers";
 import { useFetch } from "@/hooks/useFetch";
 import Spinner from "@/components/shared/Spinner";
 import FetchError from "@/components/shared/FetchError";

@@ -4,8 +4,8 @@ import { useState, useTransition } from "react";
 import { toast } from "sonner";
 import { ChevronDown, History, Plus, TrendingUp, TrendingDown } from "lucide-react";
 
-import { getPortfolio, getPortfolioTransactions, getAssetPerformance } from "@/actions/portfolio/portfolios.actions";
-import { updateAssetPrice } from "@/actions/portfolio/assets.actions";
+import { getPortfolio, getPortfolioTransactions, getAssetPerformance } from "@/lib/data/portfolio/portfolios";
+import { updateAssetPrice } from "@/lib/data/portfolio/assets";
 import {
   addBuyTransaction,
   addSellTransaction,
@@ -13,7 +13,7 @@ import {
   addWithdrawalTransaction,
   addDividendTransaction,
   deleteTransaction,
-} from "@/actions/portfolio/movements.actions";
+} from "@/lib/data/portfolio/movements";
 import {
   computeMontantInvesti,
   computeValeurActuelle,

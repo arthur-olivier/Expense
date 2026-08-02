@@ -7,8 +7,8 @@ import { ProjectionTab } from "./ProjectionTab";
 import { ObjectifTab } from "./ObjectifTab";
 import { SauvegardesTab } from "./SauvegardesTab";
 import PageGuide from "@/components/shared/PageGuide";
+import type { SimulationSaveRecord } from "@/lib/data/simulateur";
 import MobileNavDrawer from "@/components/shared/MobileNavDrawer";
-import type { SimulationSaveRecord } from "@/actions/simulateur.actions";
 
 interface SimulateurClientProps {
   initialPatrimoine: number;
