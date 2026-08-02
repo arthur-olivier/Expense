@@ -280,14 +280,14 @@ export default function WalletCard({
               className="flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium"
               style={{ background: "var(--color-warning-bg)", color: "var(--color-warning)" }}
             >
-              <Lock className="size-3" /> Bloqué
+              <Lock className="size-3" /> <span className="hidden md:inline">Bloqué</span>
             </span>
           ) : (
             <span
               className="flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium"
               style={{ background: "var(--color-success-bg)", color: "var(--color-success)" }}
             >
-              <Unlock className="size-3" /> Disponible
+              <Unlock className="size-3" /> <span className="hidden md:inline">Disponible</span>
             </span>
           )}
           <div className="flex-1" />
