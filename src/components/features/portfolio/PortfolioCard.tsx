@@ -328,8 +328,9 @@ export default function PortfolioCard({
           >
             <History className="size-3.5" /> Historique
           </Button>
-          <Button size="sm" onClick={() => setMovementOpen(true)}>
-            <Plus className="size-4" /> Mouvement
+          <Button size="sm" onClick={() => setMovementOpen(true)} aria-label="Mouvement">
+            <Plus className="size-4 md:mr-1.5" />
+            <span className="hidden md:inline">Mouvement</span>
           </Button>
         </div>
 
