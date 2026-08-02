@@ -55,7 +55,7 @@ function DialogContent({
         onInteractOutside={(e) => e.preventDefault()}
         className={cn(
           // Mobile (< md) : feuille ancrée en bas, pleine largeur, poignée, coins hauts arrondis
-          "fixed inset-x-0 bottom-0 left-0 top-auto z-50 grid max-h-[92vh] w-full max-w-full gap-4 overflow-y-auto rounded-t-2xl rounded-b-none bg-popover p-4 pt-3 text-sm text-popover-foreground ring-1 ring-foreground/10 outline-none duration-200",
+          "fixed inset-x-0 bottom-0 left-0 top-auto z-50 grid max-h-[92vh] w-full max-w-full gap-4 overflow-x-hidden overflow-y-auto rounded-t-2xl rounded-b-none bg-popover p-4 pt-3 text-sm text-popover-foreground ring-1 ring-foreground/10 outline-none duration-200",
           // Desktop (md+) : modale centrée classique
           "md:inset-x-auto md:bottom-auto md:left-1/2 md:top-1/2 md:max-h-[85vh] md:w-full md:max-w-sm md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-xl md:pt-4",
           // Animations : slide depuis le bas sur mobile, zoom au centre sur desktop
