@@ -1,0 +1,284 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlserver"
+}
+
+model User {
+  id              String    @id @default(cuid())
+  email           String?   @unique
+  name            String?
+  emailVerified   DateTime?
+  password        String?
+  image           String?   @db.Text
+  createdAt       DateTime  @default(now()) @map("created_at")
+  updatedAt       DateTime  @updatedAt @map("updated_at")
+  lastProcessedAt DateTime? @map("last_processed_at")
+
+  accounts          Account[]
+  incomes           Incomes[]
+  expenses          Expenses[]
+  financialAccounts FinancialAccount[]
+  investments       Investments[]
+  portfolios        Portfolio[]
+  assets            Asset[]
+  brokers           Broker[]
+  simulationSaves   SimulationSave[]
+
+  @@map("users")
+}
+
+// Simulation d'épargne sauvegardée par l'utilisateur depuis le simulateur.
+// `type` distingue une projection ("Je simule") d'un objectif ("J'ai un objectif") ;
+// les champs de paramètres sont mutualisés, seuls ceux utiles au type sont renseignés.
+model SimulationSave {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  type      String // "projection" | "objectif"
+  name      String
+  depart    Float    @default(0)
+  mensuel   Float    @default(0)
+  objectif  Float    @default(0)
+  duree     Int      @default(10)
+  taux      Float    @default(5)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("simulation_saves")
+}
+
+model PasswordResetToken {
+  id        Int      @id @default(autoincrement())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Incomes {
+  id               Int       @id @default(autoincrement())
+  userId           String    @map("user_id")
+  label            String
+  amount           Float
+  date             DateTime
+  isRecurring      Boolean
+  dateEndRecurring DateTime?
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("incomes")
+}
+
+model Expenses {
+  id               Int       @id @default(autoincrement())
+  userId           String    @map("user_id")
+  label            String
+  amount           Float
+  date             DateTime
+  isRecurring      Boolean
+  dateEndRecurring DateTime?
+  category         Int
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@map("expenses")
+}
+
+model FinancialAccount {
+  id               String   @id @default(cuid())
+  userId           String   @map("user_id")
+  name             String
+  isLocked         Boolean  @default(false) @map("is_locked")
+  balance          Float    @default(0)
+  balanceUpdatedAt DateTime @default(now()) @map("balance_updated_at")
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  user        User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categories  WalletCategory[]
+  investments Investments[]
+
+  @@map("financial_accounts")
+}
+
+model WalletCategory {
+  id        String   @id @default(cuid())
+  accountId String   @map("account_id")
+  name      String
+  balance   Float    @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  account      FinancialAccount    @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  transactions WalletTransaction[]
+  investments  Investments[]
+
+  @@map("wallet_categories")
+}
+
+model WalletTransaction {
+  id           Int      @id @default(autoincrement())
+  categoryId   String   @map("category_id")
+  investmentId Int?     @map("investment_id")
+  label        String
+  amount       Float
+  balanceAfter Float    @default(0) @map("balance_after")
+  date         DateTime @default(now())
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  category   WalletCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  investment Investments?   @relation(fields: [investmentId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("wallet_transactions")
+}
+
+model Broker {
+  id          String   @id @default(cuid())
+  userId      String   @map("user_id")
+  name        String
+  cashBalance Float    @default(0) @map("cash_balance")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  user         User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  portfolios   Portfolio[]
+  transactions BrokerCashTransaction[]
+
+  @@map("brokers")
+}
+
+model BrokerCashTransaction {
+  id                     String   @id @default(cuid())
+  brokerId               String   @map("broker_id")
+  portfolioId            String?  @map("portfolio_id")
+  portfolioTransactionId String?  @map("portfolio_transaction_id")
+  type                   String
+  amount                 Float
+  balanceAfter           Float    @default(0) @map("balance_after")
+  date                   DateTime
+  externalId             String?  @map("external_id")
+  // Nom du portefeuille en vis-à-vis pour un virement interne détecté à
+  // l'import (ex. "PEA" sur la ligne de sortie du CTO qui l'a financé).
+  counterpartyLabel      String?  @map("counterparty_label")
+  createdAt              DateTime @default(now()) @map("created_at")
+
+  broker               Broker                @relation(fields: [brokerId], references: [id], onDelete: Cascade)
+  portfolio            Portfolio?            @relation(fields: [portfolioId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  portfolioTransaction PortfolioTransaction? @relation(fields: [portfolioTransactionId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("broker_cash_transactions")
+}
+
+model Portfolio {
+  id          String   @id @default(cuid())
+  userId      String   @map("user_id")
+  brokerId    String?  @map("broker_id")
+  name        String
+  type        String
+  hasOwnCash  Boolean  @default(true) @map("has_own_cash")
+  openedAt    DateTime @map("opened_at")
+  cashBalance Float    @default(0) @map("cash_balance")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  user                   User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  broker                 Broker?                 @relation(fields: [brokerId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  positions              Position[]
+  transactions           PortfolioTransaction[]
+  brokerCashTransactions BrokerCashTransaction[]
+
+  @@map("portfolios")
+}
+
+model Asset {
+  id          String    @id @default(cuid())
+  userId      String    @map("user_id")
+  name        String
+  isin        String?
+  ticker      String?
+  currency    String    @default("EUR")
+  lastPrice   Float?    @map("last_price")
+  lastPriceAt DateTime? @map("last_price_at")
+  autoUpdate  Boolean   @default(true) @map("auto_update")
+
+  user         User                   @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  positions    Position[]
+  transactions PortfolioTransaction[]
+
+  @@map("assets")
+}
+
+model Position {
+  id          String   @id @default(cuid())
+  portfolioId String   @map("portfolio_id")
+  assetId     String   @map("asset_id")
+  quantity    Float    @default(0)
+  pru         Float    @default(0)
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  portfolio Portfolio @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  asset     Asset     @relation(fields: [assetId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@unique([portfolioId, assetId])
+  @@map("positions")
+}
+
+model PortfolioTransaction {
+  id                String   @id @default(cuid())
+  portfolioId       String   @map("portfolio_id")
+  assetId           String?  @map("asset_id")
+  type              String
+  quantity          Float?
+  price             Float?
+  amount            Float
+  fees              Float    @default(0)
+  date              DateTime
+  externalId        String?  @map("external_id")
+  // Nom du portefeuille en vis-à-vis pour un virement interne détecté à
+  // l'import (ex. "Compte-titres" sur la ligne d'entrée du PEA qu'il a financée).
+  counterpartyLabel String?  @map("counterparty_label")
+  createdAt         DateTime @default(now()) @map("created_at")
+
+  portfolio             Portfolio              @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  asset                 Asset?                 @relation(fields: [assetId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  brokerCashTransactions BrokerCashTransaction[]
+
+  @@map("portfolio_transactions")
+}
+
+model Investments {
+  id               Int       @id @default(autoincrement())
+  userId           String    @map("user_id")
+  accountId        String    @map("account_id")
+  categoryId       String?   @map("category_id")
+  label            String
+  amount           Float
+  date             DateTime
+  isRecurring      Boolean   @map("is_recurring")
+  dateEndRecurring DateTime? @map("date_end_recurring")
+  lastGeneratedAt  DateTime? @map("last_generated_at")
+
+  user         User                @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  account      FinancialAccount    @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  category     WalletCategory?     @relation(fields: [categoryId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  transactions WalletTransaction[]
+
+  @@map("investments")
+}
