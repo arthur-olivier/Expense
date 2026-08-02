@@ -2,8 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
-import { addInvestment, updateInvestment } from "@/actions/charges/investments.actions";
-import { getWallets } from "@/actions/wallet.actions";
+import { addInvestment, updateInvestment } from "@/lib/data/charges/investments";
+import { getWallets } from "@/lib/data/wallet";
 import Modal from "@/components/shared/Modal";
 import InformationDialog from "@/components/shared/InformationDialog";
 import { Input } from "@/components/ui/input";

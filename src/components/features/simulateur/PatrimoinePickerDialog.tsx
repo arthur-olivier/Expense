@@ -4,7 +4,7 @@ import { useState, useEffect, useTransition } from "react";
 import { Wallet, ChevronRight, Loader2 } from "lucide-react";
 import Modal from "@/components/shared/Modal";
 import { fmt } from "@/lib/calculations/epargne-calculations";
-import { getPatrimoineBreakdown, type PatrimoineBreakdown } from "@/actions/simulateur.actions";
+import { getPatrimoineBreakdown, type PatrimoineBreakdown } from "@/lib/data/simulateur";
 
 interface PatrimoinePickerDialogProps {
   open: boolean;

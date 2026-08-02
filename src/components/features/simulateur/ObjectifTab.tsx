@@ -8,7 +8,7 @@ import { RateScenarioChart } from "./RateScenarioChart";
 import { StatsGrid } from "./StatsGrid";
 import { PatrimoinePickerDialog } from "./PatrimoinePickerDialog";
 import { SaveSimulationDialog } from "./SaveSimulationDialog";
-import type { SimulationSaveRecord } from "@/actions/simulateur.actions";
+import type { SimulationSaveRecord } from "@/lib/data/simulateur";
 
 interface ObjectifTabProps {
   initialPatrimoine: number;

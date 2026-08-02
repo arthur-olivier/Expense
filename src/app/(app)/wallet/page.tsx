@@ -4,7 +4,7 @@ import { useState, useTransition } from "react";
 import { toast } from "sonner";
 import { Plus, Lock, Unlock } from "lucide-react";
 
-import { getWallets, createWallet, deleteWallet } from "@/actions/wallet.actions";
+import { getWallets, createWallet, deleteWallet } from "@/lib/data/wallet";
 import { useFetch } from "@/hooks/useFetch";
 import Spinner from "@/components/shared/Spinner";
 import FetchError from "@/components/shared/FetchError";

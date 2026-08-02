@@ -9,7 +9,7 @@ import {
   addBrokerWithdrawal,
   getBrokerTransactions,
   deleteBrokerCashTransaction,
-} from "@/actions/portfolio/brokers.actions";
+} from "@/lib/data/portfolio/brokers";
 import type { Broker, BrokerTransactionRow } from "@/types/portfolio";
 import { PortfolioTransactionTypeLabels } from "@/lib/enums";
 

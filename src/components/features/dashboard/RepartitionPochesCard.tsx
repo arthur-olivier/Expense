@@ -29,7 +29,7 @@ export function RepartitionPochesCard({ categorySlices, totalPatrimoine }: Props
           <div className="mb-3.5 flex h-1.5 overflow-hidden rounded-full">
             {categorySlices.map((c) => (
               <span
-                key={c.label}
+                key={c.id}
                 style={{ width: `${pochesTotal > 0 ? (c.value / pochesTotal) * 100 : 0}%`, background: c.color }}
               />
             ))}
@@ -37,7 +37,7 @@ export function RepartitionPochesCard({ categorySlices, totalPatrimoine }: Props
 
           <div className="flex flex-col gap-3">
             {categorySlices.map((c) => (
-              <div key={c.label} className="flex items-center justify-between gap-2 text-[13px]">
+              <div key={c.id} className="flex items-center justify-between gap-2 text-[13px]">
                 <span className="flex min-w-0 items-center gap-2" style={{ color: "var(--color-text-primary)" }}>
                   <i className="h-1.5 w-1.5 shrink-0 rounded-sm" style={{ background: c.color }} />
                   <span className="truncate">{c.label}</span>

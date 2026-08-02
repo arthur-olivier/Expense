@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { TrendingUp, TrendingDown, PiggyBank } from "lucide-react";
 
-import { deleteRevenu } from "@/actions/charges/revenus.actions";
-import { deleteDepense } from "@/actions/charges/depenses.actions";
-import { deleteInvestment } from "@/actions/charges/investments.actions";
+import { deleteRevenu } from "@/lib/data/charges/revenus";
+import { deleteDepense } from "@/lib/data/charges/depenses";
+import { deleteInvestment } from "@/lib/data/charges/investments";
 import RevenuModal from "@/components/features/charges/RevenuModal";
 import DepenseModal from "@/components/features/charges/DepenseModal";
 import InvestmentModal from "@/components/features/charges/InvestmentModal";

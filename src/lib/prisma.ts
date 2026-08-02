@@ -24,7 +24,12 @@ function parseSqlServerUrl(url: string) {
   };
 }
 
-const config = parseSqlServerUrl(process.env.DATABASE_URL!);
+// En mode démo il n'y a pas de base : on tolère l'absence de DATABASE_URL avec une
+// config factice. Le client Prisma est créé mais jamais interrogé (aucune connexion
+// n'est ouverte tant qu'aucune requête n'est lancée).
+const config = process.env.DATABASE_URL
+  ? parseSqlServerUrl(process.env.DATABASE_URL)
+  : { server: "localhost", port: 1433, database: "demo", user: "sa", password: "" };
 
 // Adaptateur de connexion à SQL Server
 const adapter = new PrismaMssql({

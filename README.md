@@ -15,10 +15,10 @@ J'ai construit ce projet pour suivre mon propre argent au même endroit : ce qui
 
 ## Stack
 
-- [Next.js 16](https://nextjs.org) (React 19 + TypeScript)
+- [Next.js 16](https://nextjs.org) (App Router, Server Actions) + React 19 + TypeScript
 - [Prisma](https://www.prisma.io) (SQLite en local, SQL Server en production)
 - [NextAuth v5](https://authjs.dev) avec identifiants et connexion Google
-- [Tailwind CSS v4](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com)
+- [Tailwind CSS v4](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com) (Radix)
 - [Recharts](https://recharts.org) pour les graphiques
 - [Resend](https://resend.com) pour les e-mails
 

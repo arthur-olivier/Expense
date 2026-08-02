@@ -2,7 +2,7 @@
 
 import { toast } from "sonner";
 import DynamicEntityModal, { type FormValues } from "@/components/shared/DynamicEntityModal";
-import { updateRevenu, addRevenu } from "@/actions/charges/revenus.actions";
+import { updateRevenu, addRevenu } from "@/lib/data/charges/revenus";
 import type { Revenu } from "@/types/finance";
 
 type Props = {

@@ -23,7 +23,7 @@ export function RepartitionComptesCard({ accountSlices, totalPatrimoine }: Props
       {accountSlices.length > 0 ? (
         <div className="flex flex-col gap-3">
           {accountSlices.map((a) => (
-            <div key={a.label} className="flex items-center justify-between gap-2 text-[13px]">
+            <div key={a.id} className="flex items-center justify-between gap-2 text-[13px]">
               <span className="flex min-w-0 items-center gap-2" style={{ color: "var(--color-text-primary)" }}>
                 {a.isLocked ? (
                   <Lock size={15} className="shrink-0" style={{ color: "var(--color-text-caption)" }} />

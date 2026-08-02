@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import ConfirmDeleteDialog from "@/components/shared/ConfirmDeleteDialog";
 import { fmt } from "@/lib/calculations/epargne-calculations";
-import { deleteSimulationSave, type SimulationSaveRecord } from "@/actions/simulateur.actions";
+import { deleteSimulationSave, type SimulationSaveRecord } from "@/lib/data/simulateur";
 
 interface SauvegardesTabProps {
   saves: SimulationSaveRecord[];

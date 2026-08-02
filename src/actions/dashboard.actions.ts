@@ -153,7 +153,7 @@ export async function getDashboardData() {
   // Valeur de chaque portefeuille = positions (quantité × cours) + liquidités
   const portfolioValues = portfolios.map((p) => {
     const valeurPositions = p.positions.reduce((sum, pos) => sum + pos.quantity * (pos.asset.lastPrice ?? 0), 0);
-    return { name: p.name, value: valeurPositions + p.cashBalance };
+    return { id: p.id, name: p.name, value: valeurPositions + p.cashBalance };
   });
   const totalPatrimoineBoursier = portfolioValues.reduce((sum, p) => sum + p.value, 0);
 
@@ -163,12 +163,14 @@ export async function getDashboardData() {
   // Parts du camembert : un secteur par compte, puis un par portefeuille
   const accountSlices = [
     ...accounts.map((a, i) => ({
+      id: a.id,
       label: a.name,
       value: a.balance,
       color: PALETTE[i % PALETTE.length],
       isLocked: a.isLocked,
     })),
     ...portfolioValues.map((p, i) => ({
+      id: p.id,
       label: p.name,
       value: p.value,
       color: PALETTE[(accounts.length + i) % PALETTE.length],
@@ -182,6 +184,7 @@ export async function getDashboardData() {
     .filter((c) => c.balance > 0)
     .sort((a, b) => b.balance - a.balance)
     .map((c, i) => ({
+      id: c.id,
       label: c.name,
       value: c.balance,
       color: PALETTE[i % PALETTE.length],

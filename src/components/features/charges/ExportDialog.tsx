@@ -5,7 +5,7 @@ import { FileDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Modal from "@/components/shared/Modal";
 import { MONTH_NAMES, CategoryLabels } from "@/lib/enums";
-import { getExportData, type ExportScope } from "@/actions/charges/export.actions";
+import { getExportData, type ExportScope } from "@/lib/data/charges/export";
 import { exportToExcel } from "@/lib/exportExcel";
 import { expandRecurring } from "@/lib/calculations/expandRecurring";
 

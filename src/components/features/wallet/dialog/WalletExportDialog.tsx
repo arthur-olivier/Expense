@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import Modal from "@/components/shared/Modal";
 import GenericSelect from "@/components/shared/GenericSelect";
 import { exportToExcel } from "@/lib/exportExcel";
-import { getWalletsTransactionsForExport, type TransactionExportScope } from "@/actions/wallet-export.actions";
+import { getWalletsTransactionsForExport, type TransactionExportScope } from "@/lib/data/wallet-export";
 import type { Wallet } from "@/types/wallet";
 
 function formatDate(date: Date | string) {
