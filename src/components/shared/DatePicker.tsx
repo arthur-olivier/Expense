@@ -17,6 +17,11 @@ type Props = {
   maxDate?: Date;
 };
 
+// Correction Date UTC
+function toUTCDate(date: Date) {
+  return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+}
+
 export function DatePicker({ value, onChange, allowNever, minDate, maxDate }: Props) {
   const [open, setOpen] = React.useState(false);
 
@@ -39,7 +44,7 @@ export function DatePicker({ value, onChange, allowNever, minDate, maxDate }: Pr
             return false;
           }}
           onSelect={(date) => {
-            onChange(date);
+            onChange(date ? toUTCDate(date) : undefined);
             setOpen(false);
           }}
         />
