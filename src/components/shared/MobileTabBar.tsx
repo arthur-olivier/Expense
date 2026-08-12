@@ -9,7 +9,7 @@ import { LayoutDashboard, Receipt, PiggyBank, TrendingUp, LineChart } from "luci
 
 const links = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/charges", label: "Charges", icon: Receipt },
+  { href: "/charges", label: "Flux mensuels", icon: Receipt },
   { href: "/wallet", label: "Comptes", icon: PiggyBank },
   { href: "/portfolio", label: "Bourse", icon: LineChart },
   { href: "/simulateur", label: "Simulateur", icon: TrendingUp },

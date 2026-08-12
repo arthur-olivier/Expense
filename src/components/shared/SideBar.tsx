@@ -6,19 +6,11 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { isDemo } from "@/lib/demo";
-import {
-  LayoutDashboard,
-  Receipt,
-  PiggyBank,
-  TrendingUp,
-  LineChart,
-  LogOut,
-  ChevronLeft,
-} from "lucide-react";
+import { LayoutDashboard, Receipt, PiggyBank, TrendingUp, LineChart, LogOut, ChevronLeft } from "lucide-react";
 
 const links = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/charges", label: "Charges", icon: Receipt },
+  { href: "/charges", label: "Flux mensuels", icon: Receipt },
   { href: "/wallet", label: "Comptes", icon: PiggyBank },
   { href: "/portfolio", label: "Bourse", icon: LineChart },
   { href: "/simulateur", label: "Simulateur", icon: TrendingUp },
@@ -81,9 +73,7 @@ export default function Sidebar() {
       {/* Top: brand + nav */}
       <div>
         {/* Brand */}
-        <div
-          className={`flex items-center gap-2.5 mb-8 ${collapsed ? "justify-center" : "px-2"}`}
-        >
+        <div className={`flex items-center gap-2.5 mb-8 ${collapsed ? "justify-center" : "px-2"}`}>
           <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-blue-600 shrink-0">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
               <rect x="2" y="5" width="20" height="14" rx="2" stroke="white" strokeWidth="1.8" />
@@ -91,9 +81,7 @@ export default function Sidebar() {
               <path d="M6 15h4" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
             </svg>
           </div>
-          {!collapsed && (
-            <span className="text-[15px] font-semibold text-white">Expense</span>
-          )}
+          {!collapsed && <span className="text-[15px] font-semibold text-white">Expense</span>}
         </div>
 
         {/* Nav label */}
@@ -153,7 +141,10 @@ export default function Sidebar() {
 
       {/* Bottom (démo) : visiteur fictif, pas de déconnexion */}
       {isDemo && (
-        <div className="flex items-center gap-2.5 px-3 py-2 pt-4" style={{ borderTop: "1px solid var(--color-sidebar-border)", justifyContent: collapsed ? "center" : "flex-start" }}>
+        <div
+          className="flex items-center gap-2.5 px-3 py-2 pt-4"
+          style={{ borderTop: "1px solid var(--color-sidebar-border)", justifyContent: collapsed ? "center" : "flex-start" }}
+        >
           <div className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 shrink-0">
             <span className="text-[10px] font-semibold text-white">V</span>
           </div>
@@ -170,10 +161,7 @@ export default function Sidebar() {
 
       {/* Bottom: user + logout */}
       {!isDemo && session?.user && (
-        <div
-          className="flex flex-col gap-0.5 pt-4"
-          style={{ borderTop: "1px solid var(--color-sidebar-border)" }}
-        >
+        <div className="flex flex-col gap-0.5 pt-4" style={{ borderTop: "1px solid var(--color-sidebar-border)" }}>
           {/* User info */}
           <div
             className="flex items-center gap-2.5 px-3 py-2 rounded-lg"
@@ -196,10 +184,7 @@ export default function Sidebar() {
               </div>
             )}
             {!collapsed && (
-              <span
-                className="text-xs font-medium truncate"
-                style={{ color: "var(--color-sidebar-text)" }}
-              >
+              <span className="text-xs font-medium truncate" style={{ color: "var(--color-sidebar-text)" }}>
                 {session.user.name ?? session.user.email}
               </span>
             )}

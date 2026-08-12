@@ -32,7 +32,7 @@ repart d'un jeu de données vierge.
 
 ## Fonctionnalités
 
-**Charges** : revenus, dépenses et placements récurrents ou ponctuels, avec calcul automatique du reste à vivre.
+**Flux mensuels** : revenus, dépenses et placements récurrents ou ponctuels, avec calcul automatique du reste à vivre.
 
 **Dashboard** : vue d'ensemble du patrimoine (liquide, bloqué, bourse), répartition des dépenses par catégorie et échéances du mois.
 
