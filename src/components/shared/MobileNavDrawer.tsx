@@ -10,18 +10,11 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { Dialog as DialogPrimitive } from "radix-ui";
-import {
-  LayoutDashboard,
-  Receipt,
-  PiggyBank,
-  TrendingUp,
-  LineChart,
-  LogOut,
-} from "lucide-react";
+import { LayoutDashboard, Receipt, PiggyBank, TrendingUp, LineChart, LogOut } from "lucide-react";
 
 const links = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/charges", label: "Charges", icon: Receipt },
+  { href: "/charges", label: "Flux mensuels", icon: Receipt },
   { href: "/wallet", label: "Comptes", icon: PiggyBank },
   { href: "/portfolio", label: "Bourse", icon: LineChart },
   { href: "/simulateur", label: "Simulateur", icon: TrendingUp },
@@ -44,13 +37,7 @@ export default function MobileNavDrawer() {
           aria-label="Ouvrir le menu"
         >
           {session?.user?.image ? (
-            <Image
-              src={session.user.image}
-              alt="avatar"
-              width={36}
-              height={36}
-              className="rounded-full"
-            />
+            <Image src={session.user.image} alt="avatar" width={36} height={36} className="rounded-full" />
           ) : (
             <span className="text-[13px] font-bold">{initial}</span>
           )}
@@ -108,31 +95,17 @@ export default function MobileNavDrawer() {
 
           {/* Bas : utilisateur + déconnexion */}
           {session?.user && (
-            <div
-              className="mt-auto pt-3.5"
-              style={{ borderTop: "1px solid rgba(255,255,255,0.10)" }}
-            >
+            <div className="mt-auto pt-3.5" style={{ borderTop: "1px solid rgba(255,255,255,0.10)" }}>
               <div className="flex items-center gap-3 p-2">
                 {session.user.image ? (
-                  <Image
-                    src={session.user.image}
-                    alt="avatar"
-                    width={36}
-                    height={36}
-                    className="rounded-full"
-                  />
+                  <Image src={session.user.image} alt="avatar" width={36} height={36} className="rounded-full" />
                 ) : (
-                  <div
-                    className="flex h-9 w-9 items-center justify-center rounded-full"
-                    style={{ background: "#1D4ED8" }}
-                  >
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full" style={{ background: "#1D4ED8" }}>
                     <span className="text-[13px] font-bold">{initial}</span>
                   </div>
                 )}
                 <div className="min-w-0">
-                  <div className="truncate text-[13.5px] font-semibold">
-                    {session.user.name ?? session.user.email}
-                  </div>
+                  <div className="truncate text-[13.5px] font-semibold">{session.user.name ?? session.user.email}</div>
                   <div className="text-[11px]" style={{ color: "var(--color-sidebar-icon)" }}>
                     Compte personnel
                   </div>

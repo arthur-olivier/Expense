@@ -112,7 +112,7 @@ export default function ChargesClient({ year, month, initialRevenus, initialDepe
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-2xl font-bold tracking-tight" style={{ color: "var(--color-text-primary)" }}>
-                  Charges mensuelles
+                  Flux mensuels
                 </h1>
                 <PageGuide
                   pageKey="charges"
